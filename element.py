@@ -27,6 +27,7 @@ class BasePageElement(object):
         element = WebDriverWait(driver, 5).until(EC.presence_of_element_located(self.locator))
         return element.text
 
+
 class BasePageMultiElement(BasePageElement):
     """Base page class that is initialized on every page object class."""
 
@@ -46,11 +47,11 @@ class BasePageMultiElement(BasePageElement):
 
 
 
-class UsernameInputElement(BasePageElement):
-    locator = locators.LoginPageLocators.USERNAME_TEXT_INPUT
-
-class PasswordInputElement(BasePageElement):
-    locator = locators.LoginPageLocators.PASSWORD_TEXT_INPUT
-
 class CategoryButtonMultiElement(BasePageMultiElement):
     locator = locators.CategoryListPageLocators.CATEGORY_BUTTON
+
+class MedicineButtonMultiElement(BasePageMultiElement):
+    locator = locators.MedicineListPageLocators.MEDICINE_BUTTON
+
+class ShowMoreButtonElement(BasePageElement):
+    locator = locators.MedicineListPageLocators.SHOW_MORE_BUTTON
