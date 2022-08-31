@@ -15,6 +15,7 @@ class HalodocMedicineScrapper():
         category_urls = category_list_page.get_all_categories_url()
         for category_url in category_urls:
             medicine_list_page = page.MedicineListPage(self.driver, category_url)
+            medicine_list_page.show_more_medicine()
             medicine_list_page.get_all_medicine_url()
             break
         # search_page.show_more_post()

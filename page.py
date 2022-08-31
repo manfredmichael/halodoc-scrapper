@@ -2,7 +2,7 @@ import time
 import utils
 import element
 
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 class BasePage(object):
     """ Base class to initialize the base page that will be called from all pages """
@@ -33,6 +33,7 @@ class CategoryListPage(BasePage):
 class MedicineListPage(BasePage):
     """ A page object to browse all medicine in a category """
     medicines = element.MedicineButtonMultiElement()
+    show_more_button = element.ShowMoreButtonElement()
 
     def __init__(self, drive, url):
         self.URL = url
@@ -43,24 +44,21 @@ class MedicineListPage(BasePage):
         for medicine in self.medicines:
             urls.append(medicine.get_attribute("href"))
             # urls.append()
+        print(len(urls))
         print(urls)
         return urls
 
     def show_more_medicine(self):
-        while self.can_scroll():
+        while True:
             time.sleep(3)
-            self.scroll()
+            try:
+                self.scroll()
+            except TimeoutException:
+                break
 
     def scroll(self):
-        element.ShowMoreButtonElement()
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        self.show_more_button.click()
 
-    def can_scroll(self):
-        try:
-            element.ShowMoreButtonElement()
-            return True
-        except NoSuchElementException:
-            return False
 
     def get_height(self):
         return self.driver.execute_script("return document.body.scrollHeight")
