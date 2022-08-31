@@ -11,3 +11,8 @@ class CategoryListPageLocators(object):
 class MedicineListPageLocators(object):
     MEDICINE_BUTTON = (By.CSS_SELECTOR, "a[class='custom-container__list__container__item--link ng-star-inserted']")
     SHOW_MORE_BUTTON = (By.CSS_SELECTOR, "button[class='custom-container__pagination--btn']")
+
+class MedicinePageLocators(object):
+    TITLE = (By.CSS_SELECTOR, "h1[class='product-label']")
+    DESCRIPTION = (By.CSS_SELECTOR, "div[class='property-container col-lg-12 col-md-12 ng-star-inserted']")
+    

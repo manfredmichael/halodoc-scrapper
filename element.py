@@ -55,3 +55,9 @@ class MedicineButtonMultiElement(BasePageMultiElement):
 
 class ShowMoreButtonElement(BasePageElement):
     locator = locators.MedicineListPageLocators.SHOW_MORE_BUTTON
+
+class MedicineTitleElement(BasePageElement):
+    locator = locators.MedicinePageLocators.TITLE
+
+class MedicineDescriptionMultiElement(BasePageMultiElement):
+    locator = locators.MedicinePageLocators.DESCRIPTION

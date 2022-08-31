@@ -4,6 +4,8 @@ import element
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
+
+
 class BasePage(object):
     """ Base class to initialize the base page that will be called from all pages """
 
@@ -40,12 +42,12 @@ class MedicineListPage(BasePage):
         super().__init__(drive)
 
     def get_all_medicine_url(self):
+        """ Return all medicine urls """
+
         urls = []
         for medicine in self.medicines:
             urls.append(medicine.get_attribute("href"))
-            # urls.append()
-        print(len(urls))
-        print(urls)
+
         return urls
 
     def show_more_medicine(self):
@@ -63,6 +65,28 @@ class MedicineListPage(BasePage):
     def get_height(self):
         return self.driver.execute_script("return document.body.scrollHeight")
 
+
+class MedicinePage(BasePage):
+    """ A page object fetch medicine information """
+    
+    title = element.MedicineTitleElement()
+    descriptions = element.MedicineDescriptionMultiElement()
+
+    def __init__(self, drive, url):
+        self.URL = url
+        super().__init__(drive)
+
+    def get_info(self):
+        """ Return scrapped information texts in dict """
+        obat = {}
+        obat['title'] = self.title.text
+        obat['description'] = {}
+        for description in self.descriptions:
+            key = description.text.split('\n')[0]
+            value = '\n'.join(description.text.split('\n')[1:])
+            obat['description'][key] = value
+
+        return obat
 
 class SearchPage(BasePage):
     URL = 'https://www.linkedin.com/search/results/content/?keywords=achievement&sid=w9B'
