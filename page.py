@@ -12,19 +12,18 @@ class BasePage(object):
     def open(self):
         self.driver.get(self.URL)
 
-class LoginPage(BasePage):
-    URL = 'https://www.linkedin.com/login'
-    username_input = element.UsernameInputElement()
-    password_input = element.PasswordInputElement()
+class CategoryListPage(BasePage):
+    URL = 'https://www.halodoc.com/obat-dan-vitamin'
+    categories = element.CategoryButtonMultiElement()
 
-    def login(self):
-        self.insert_authentication()
-
-    def insert_authentication(self):
-        username, password = utils.Authentication().get_authentication()
-        self.username_input = username
-        self.password_input = password
-        self.password_input.submit()
+    def get_all_categories_url(self):
+        urls = []
+        for category in self.categories:
+            urls.append(category.get_attribute("href"))
+            # urls.append()
+        print(len(urls))
+        print(urls)
+        return urls
 
 class SearchPage(BasePage):
     URL = 'https://www.linkedin.com/search/results/content/?keywords=achievement&sid=w9B'

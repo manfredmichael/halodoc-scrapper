@@ -2,36 +2,34 @@ from selenium import webdriver
 import time
 import page
 
-DRIVER_PATH = '../../webdriver/chromedriver'
+DRIVER_PATH = 'webdriver/chromedriver'
 
-class LinkedinPostScrapper():
+class HalodocMedicineScrapper():
     """A sample test class to show how page object works"""
 
     def setup(self):
         self.driver = webdriver.Chrome(DRIVER_PATH)
 
-    def login(self):
-        login_page = page.LoginPage(self.driver)
-        login_page.login()
+    def collect_medicines(self):
+        category_list_page = page.CategoryListPage(self.driver)
+        category_list_page.get_all_categories_url()
 
-    def collect_posts(self):
-        search_page = page.SearchPage(self.driver)
-        search_page.show_more_post()
+        # search_page.show_more_post()
 
-    def main(self):
+    def run(self):
         self.setup()
-        self.login()
-        self.collect_posts()
+        # self.login()
+        self.collect_medicines()
 
     def tear_down(self):
         self.driver.close()
 
 if __name__ == '__main__':
-    scrapper = LinkedinPostScrapper()
+    scrapper = HalodocMedicineScrapper()
     try:
-        scrapper.main()
+        scrapper.run()
     finally:
-        time.sleep(20)
+        time.sleep(5)
         scrapper.tear_down()
 
 

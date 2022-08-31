@@ -5,3 +5,5 @@ class LoginPageLocators(object):
     USERNAME_TEXT_INPUT = (By.ID, 'username')
     PASSWORD_TEXT_INPUT = (By.ID, 'password')
 
+class CategoryListPageLocators(object):
+    CATEGORY_BUTTON = (By.CSS_SELECTOR, "a[class='d-flex flex-fill flex-row align-items-center ng-star-inserted']")
